@@ -29,11 +29,9 @@ namespace TextEditView.App
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.StandartMenu = new System.Windows.Forms.MenuStrip();
-            this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.InputText = new System.Windows.Forms.RichTextBox();
             this.FileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.NewFileButton = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenFileButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,9 +45,18 @@ namespace TextEditView.App
             this.SettingsMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.ChooseFontButton = new System.Windows.Forms.ToolStripMenuItem();
             this.ChooseBackgroundButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.InputText = new System.Windows.Forms.RichTextBox();
             this.FontChooserDialog = new System.Windows.Forms.FontDialog();
             this.SelectColorDialog = new System.Windows.Forms.ColorDialog();
+            this.InputHelper = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.CopyTextHelper = new System.Windows.Forms.ToolStripMenuItem();
+            this.PasteTextHelper = new System.Windows.Forms.ToolStripMenuItem();
+            this.CutTextHelper = new System.Windows.Forms.ToolStripMenuItem();
+            this.SelectAllTextHelper = new System.Windows.Forms.ToolStripMenuItem();
             this.StandartMenu.SuspendLayout();
+            this.InputHelper.SuspendLayout();
             this.SuspendLayout();
             // 
             // StandartMenu
@@ -64,26 +71,6 @@ namespace TextEditView.App
             this.StandartMenu.Size = new System.Drawing.Size(764, 26);
             this.StandartMenu.TabIndex = 0;
             this.StandartMenu.Text = "menuStrip1";
-            // 
-            // SaveFileDialog
-            // 
-            this.SaveFileDialog.Filter = "Text Files|*.txt|All Files|*.*";
-            this.SaveFileDialog.RestoreDirectory = true;
-            this.SaveFileDialog.Title = "Text EditView: Saving file";
-            // 
-            // OpenFileDialog
-            // 
-            this.OpenFileDialog.Filter = "Text Files|*.txt|All Files|*.*";
-            this.OpenFileDialog.Title = "Text EditView: Opening file";
-            // 
-            // InputText
-            // 
-            this.InputText.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.InputText.Location = new System.Drawing.Point(0, 26);
-            this.InputText.Name = "InputText";
-            this.InputText.Size = new System.Drawing.Size(764, 387);
-            this.InputText.TabIndex = 1;
-            this.InputText.Text = "";
             // 
             // FileMenu
             // 
@@ -101,14 +88,14 @@ namespace TextEditView.App
             // 
             this.NewFileButton.Image = global::TextEditView.App.Icons.NewFile;
             this.NewFileButton.Name = "NewFileButton";
-            this.NewFileButton.Size = new System.Drawing.Size(112, 22);
+            this.NewFileButton.Size = new System.Drawing.Size(180, 22);
             this.NewFileButton.Text = "New";
             // 
             // OpenFileButton
             // 
             this.OpenFileButton.Image = global::TextEditView.App.Icons.OpenFile;
             this.OpenFileButton.Name = "OpenFileButton";
-            this.OpenFileButton.Size = new System.Drawing.Size(112, 22);
+            this.OpenFileButton.Size = new System.Drawing.Size(180, 22);
             this.OpenFileButton.Text = "Open";
             this.OpenFileButton.Click += new System.EventHandler(this.OpenFileButton_Click);
             // 
@@ -116,14 +103,14 @@ namespace TextEditView.App
             // 
             this.SaveFileButton.Image = global::TextEditView.App.Icons.SaveFile;
             this.SaveFileButton.Name = "SaveFileButton";
-            this.SaveFileButton.Size = new System.Drawing.Size(112, 22);
+            this.SaveFileButton.Size = new System.Drawing.Size(180, 22);
             this.SaveFileButton.Text = "Save";
             // 
             // SaveAsFileButton
             // 
             this.SaveAsFileButton.Image = global::TextEditView.App.Icons.SaveAsFile;
             this.SaveAsFileButton.Name = "SaveAsFileButton";
-            this.SaveAsFileButton.Size = new System.Drawing.Size(112, 22);
+            this.SaveAsFileButton.Size = new System.Drawing.Size(180, 22);
             this.SaveAsFileButton.Text = "Save as";
             this.SaveAsFileButton.Click += new System.EventHandler(this.SaveAsFileButton_Click);
             // 
@@ -143,7 +130,7 @@ namespace TextEditView.App
             // 
             this.CopyTextButton.Image = global::TextEditView.App.Icons.CopyText;
             this.CopyTextButton.Name = "CopyTextButton";
-            this.CopyTextButton.Size = new System.Drawing.Size(122, 22);
+            this.CopyTextButton.Size = new System.Drawing.Size(180, 22);
             this.CopyTextButton.Text = "Copy";
             this.CopyTextButton.Click += new System.EventHandler(this.CopyTextButton_Click);
             // 
@@ -151,7 +138,7 @@ namespace TextEditView.App
             // 
             this.PasteTextButton.Image = global::TextEditView.App.Icons.PasteText;
             this.PasteTextButton.Name = "PasteTextButton";
-            this.PasteTextButton.Size = new System.Drawing.Size(122, 22);
+            this.PasteTextButton.Size = new System.Drawing.Size(180, 22);
             this.PasteTextButton.Text = "Paste";
             this.PasteTextButton.Click += new System.EventHandler(this.PasteTextButton_Click);
             // 
@@ -159,7 +146,7 @@ namespace TextEditView.App
             // 
             this.CutTextButton.Image = global::TextEditView.App.Icons.CutText;
             this.CutTextButton.Name = "CutTextButton";
-            this.CutTextButton.Size = new System.Drawing.Size(122, 22);
+            this.CutTextButton.Size = new System.Drawing.Size(180, 22);
             this.CutTextButton.Text = "Cut";
             this.CutTextButton.Click += new System.EventHandler(this.CutTextButton_Click);
             // 
@@ -167,7 +154,7 @@ namespace TextEditView.App
             // 
             this.SelectAllTextButton.Image = global::TextEditView.App.Icons.SelectAllText;
             this.SelectAllTextButton.Name = "SelectAllTextButton";
-            this.SelectAllTextButton.Size = new System.Drawing.Size(122, 22);
+            this.SelectAllTextButton.Size = new System.Drawing.Size(180, 22);
             this.SelectAllTextButton.Text = "Select All";
             this.SelectAllTextButton.Click += new System.EventHandler(this.SelectAllTextButton_Click);
             // 
@@ -197,9 +184,72 @@ namespace TextEditView.App
             this.ChooseBackgroundButton.Text = "Choose background";
             this.ChooseBackgroundButton.Click += new System.EventHandler(this.ChooseBackgroundButton_Click);
             // 
+            // SaveFileDialog
+            // 
+            this.SaveFileDialog.Filter = "Text Files|*.txt|All Files|*.*";
+            this.SaveFileDialog.RestoreDirectory = true;
+            this.SaveFileDialog.Title = "Text EditView: Saving file";
+            // 
+            // OpenFileDialog
+            // 
+            this.OpenFileDialog.Filter = "Text Files|*.txt|All Files|*.*";
+            this.OpenFileDialog.Title = "Text EditView: Opening file";
+            // 
+            // InputText
+            // 
+            this.InputText.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.InputText.Location = new System.Drawing.Point(0, 26);
+            this.InputText.Name = "InputText";
+            this.InputText.Size = new System.Drawing.Size(764, 387);
+            this.InputText.TabIndex = 1;
+            this.InputText.Text = "";
+            this.InputText.MouseUp += new System.Windows.Forms.MouseEventHandler(this.InputText_MouseUp);
+            // 
             // SelectColorDialog
             // 
             this.SelectColorDialog.AnyColor = true;
+            // 
+            // InputHelper
+            // 
+            this.InputHelper.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.CopyTextHelper,
+            this.PasteTextHelper,
+            this.CutTextHelper,
+            this.SelectAllTextHelper});
+            this.InputHelper.Name = "InputHelper";
+            this.InputHelper.Size = new System.Drawing.Size(123, 92);
+            // 
+            // CopyTextHelper
+            // 
+            this.CopyTextHelper.Image = global::TextEditView.App.Icons.CopyText;
+            this.CopyTextHelper.Name = "CopyTextHelper";
+            this.CopyTextHelper.Size = new System.Drawing.Size(122, 22);
+            this.CopyTextHelper.Text = "Copy";
+            this.CopyTextHelper.Click += new System.EventHandler(this.CopyTextHelper_Click);
+            // 
+            // PasteTextHelper
+            // 
+            this.PasteTextHelper.Image = global::TextEditView.App.Icons.PasteText;
+            this.PasteTextHelper.Name = "PasteTextHelper";
+            this.PasteTextHelper.Size = new System.Drawing.Size(122, 22);
+            this.PasteTextHelper.Text = "Paste";
+            this.PasteTextHelper.Click += new System.EventHandler(this.PasteTextHelper_Click);
+            // 
+            // CutTextHelper
+            // 
+            this.CutTextHelper.Image = global::TextEditView.App.Icons.CutText;
+            this.CutTextHelper.Name = "CutTextHelper";
+            this.CutTextHelper.Size = new System.Drawing.Size(122, 22);
+            this.CutTextHelper.Text = "Cut";
+            this.CutTextHelper.Click += new System.EventHandler(this.CutTextHelper_Click);
+            // 
+            // SelectAllTextHelper
+            // 
+            this.SelectAllTextHelper.Image = global::TextEditView.App.Icons.SelectAllText;
+            this.SelectAllTextHelper.Name = "SelectAllTextHelper";
+            this.SelectAllTextHelper.Size = new System.Drawing.Size(122, 22);
+            this.SelectAllTextHelper.Text = "Select All";
+            this.SelectAllTextHelper.Click += new System.EventHandler(this.SelectAllTextHelper_Click);
             // 
             // Main
             // 
@@ -216,6 +266,7 @@ namespace TextEditView.App
             this.Text = "Text EditView";
             this.StandartMenu.ResumeLayout(false);
             this.StandartMenu.PerformLayout();
+            this.InputHelper.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,5 +293,10 @@ namespace TextEditView.App
         private System.Windows.Forms.ToolStripMenuItem ChooseBackgroundButton;
         private System.Windows.Forms.FontDialog FontChooserDialog;
         private System.Windows.Forms.ColorDialog SelectColorDialog;
+        private System.Windows.Forms.ContextMenuStrip InputHelper;
+        private System.Windows.Forms.ToolStripMenuItem CopyTextHelper;
+        private System.Windows.Forms.ToolStripMenuItem PasteTextHelper;
+        private System.Windows.Forms.ToolStripMenuItem CutTextHelper;
+        private System.Windows.Forms.ToolStripMenuItem SelectAllTextHelper;
     }
 }

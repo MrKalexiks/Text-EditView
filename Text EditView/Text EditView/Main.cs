@@ -93,5 +93,31 @@ namespace TextEditView.App
                 InputText.Font = FontChooserDialog.Font;
             }
         }
+
+        private void CopyTextHelper_Click(object sender, EventArgs e)
+        {
+            InputText.Copy();
+        }
+
+        private void PasteTextHelper_Click(object sender, EventArgs e)
+        {
+            InputText.Paste();
+        }
+
+        private void CutTextHelper_Click(object sender, EventArgs e)
+        {
+            InputText.Cut();
+        }
+
+        private void SelectAllTextHelper_Click(object sender, EventArgs e)
+        {
+            InputText.SelectAll();
+        }
+
+        private void InputText_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                InputText.ContextMenuStrip = InputHelper;
+        }
     }
 }
