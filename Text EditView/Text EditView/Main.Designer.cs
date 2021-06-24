@@ -105,6 +105,7 @@ namespace TextEditView.App
             this.SaveFileButton.Name = "SaveFileButton";
             this.SaveFileButton.Size = new System.Drawing.Size(180, 22);
             this.SaveFileButton.Text = "Save";
+            this.SaveFileButton.Click += new System.EventHandler(this.SaveFileButton_Click);
             // 
             // SaveAsFileButton
             // 

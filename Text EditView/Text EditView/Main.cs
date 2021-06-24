@@ -12,6 +12,8 @@ namespace TextEditView.App
 {
     public partial class Main : Form
     {
+
+        string SavedFile = "";
         public Main()
         {
             InitializeComponent();
@@ -27,6 +29,7 @@ namespace TextEditView.App
             else
             {
                 System.IO.File.WriteAllText(SaveFileDialog.FileName, InputText.Text);
+                SavedFile = SaveFileDialog.FileName;
                 MessageBox.Show("Successed save file.", "Text EditView");
             }
 
@@ -41,14 +44,15 @@ namespace TextEditView.App
             }
             else
             {
+                InputText.Text = System.IO.File.ReadAllText(OpenFileDialog.FileName);
                 MessageBox.Show("Successed read file.", "Text EditView");
-                InputText.Text = System.IO.File.ReadAllText(SaveFileDialog.FileName);
             }
         }
 
         private void CopyTextButton_Click(object sender, EventArgs e)
         {
             InputText.Copy();
+            
         }
 
         private void PasteTextButton_Click(object sender, EventArgs e)
@@ -118,6 +122,29 @@ namespace TextEditView.App
         {
             if (e.Button == MouseButtons.Right)
                 InputText.ContextMenuStrip = InputHelper;
+        }
+
+        private void SaveFileButton_Click(object sender, EventArgs e)
+        {
+            if (SavedFile == "")
+            {
+                if (SaveFileDialog.ShowDialog() == DialogResult.Cancel)
+                {
+                    MessageBox.Show("You closed window to saving file.", "Text EditView");
+                    return;
+                }
+                else
+                {
+                    System.IO.File.WriteAllText(SaveFileDialog.FileName, InputText.Text);
+                    SavedFile = SaveFileDialog.FileName;
+                    MessageBox.Show("Successed save file.", "Text EditView");
+                }
+            }
+            else
+            {
+                System.IO.File.WriteAllText(SavedFile, InputText.Text);
+                MessageBox.Show("Successed save file.", "Text EditView");
+            }
         }
     }
 }
