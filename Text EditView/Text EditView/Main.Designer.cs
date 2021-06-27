@@ -90,6 +90,7 @@ namespace TextEditView.App
             this.NewFileButton.Name = "NewFileButton";
             this.NewFileButton.Size = new System.Drawing.Size(180, 22);
             this.NewFileButton.Text = "New";
+            this.NewFileButton.Click += new System.EventHandler(this.NewFileButton_Click);
             // 
             // OpenFileButton
             // 
@@ -264,7 +265,7 @@ namespace TextEditView.App
             this.MainMenuStrip = this.StandartMenu;
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "Main";
-            this.Text = "Text EditView";
+            this.Text = "Text EditView - Basic Edition";
             this.StandartMenu.ResumeLayout(false);
             this.StandartMenu.PerformLayout();
             this.InputHelper.ResumeLayout(false);

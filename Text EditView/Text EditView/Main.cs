@@ -7,16 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Yandex.Metrica;
+
 
 namespace TextEditView.App
 {
     public partial class Main : Form
     {
+        string AppPath = $@"C:\Users\{Environment.UserName}\Text EditView\";
 
         string SavedFile = "";
         public Main()
         {
             InitializeComponent();
+            YandexMetricaFolder.SetCurrent(AppPath + @"Metrica\");
+            YandexMetrica.Activate("7035eee7-a1d8-41c1-a078-db5c6436ad00");
         }
 
         private void SaveAsFileButton_Click(object sender, EventArgs e)
@@ -145,6 +150,11 @@ namespace TextEditView.App
                 System.IO.File.WriteAllText(SavedFile, InputText.Text);
                 MessageBox.Show("Successed save file.", "Text EditView");
             }
+        }
+
+        private void NewFileButton_Click(object sender, EventArgs e)
+        {
+            InputText.Text = "";
         }
     }
 }
