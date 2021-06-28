@@ -1,2 +1,3 @@
 # Text.EditView
-## Easy text editor for everyone and with open source.
+## Edit your era of reading and editing text!
+Developer mode, with C#, Java and other...
